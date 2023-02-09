@@ -5,6 +5,7 @@ import { legacy_createStore as createStore, applyMiddleware, compose } from "red
 
 import thunk from "redux-thunk";
 import reducers from "./reducers";
+import "./index.css";
 
 import App from "./App";
 
