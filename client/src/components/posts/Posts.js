@@ -1,8 +1,8 @@
 import React from "react";
 import Post from "./post/Post";
-import useStyles from "./styles.js";
+// import useStyles from "./styles.js";
 const Posts = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     <>
       <h1>Posts</h1>
