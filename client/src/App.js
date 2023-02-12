@@ -13,10 +13,9 @@ const App = () => {
       <NavBar />
       <Container maxWidth="lg">
         <Routes>
-          <Route path="/" exace component={Home}></Route>
-          <Route path="/auth" exace component={Auth}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/auth" element={<Auth />}></Route>
         </Routes>
-        <Home />
       </Container>
     </BrowserRouter>
   );

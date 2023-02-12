@@ -6,16 +6,18 @@ import { LockOutlinedIcon } from "@material-ui/icons/LockOutlined";
 import Input from "./Input";
 import useStyles from "./styles";
 
+// const initialState = { firstName: "", lastName: "", email: "", password: "", confirmPassword: "" };
+
 const Auth = () => {
   const classes = useStyles();
 
   const [showPassword, setShowPassword] = useState(false);
+  //   const [isSignUp, setIsSignUp] = useState(false);
 
   const isSignUp = false;
-
   const handleSubmit = () => {};
   const handleChange = () => {};
-  const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
+  const handleShowPassword = () => setShowPassword(!showPassword);
 
   return (
     <Container component="main" masWidth="xs">
@@ -37,7 +39,7 @@ const Auth = () => {
               name="password"
               label="Password"
               handleChange={handleChange}
-              typoe={showPassword ? "text" : "password"}
+              type={showPassword ? "text" : "password"}
             />
             {isSignUp && (
               <Input name="confirmPassword" label="Repeat Password" handleChange={handleShowPassword} type="password" />
