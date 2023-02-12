@@ -20,22 +20,22 @@ const NavBar = (user) => {
           alt="memories"
           height="60"
         />
-        <Toolbar className={classes.toolbar}>
-          {user ? (
-            <div className={classes.profile}>
-              <Avatar className={classes.purple}></Avatar>
-              <Typography className={classes.username} variant="h6"></Typography>
-              <Button variant="contained" className={classes.logout} color="secondary">
-                Logout
-              </Button>
-            </div>
-          ) : (
-            <Button component={Link} to="/auth" variant="contained" color="primary">
-              Sign in
-            </Button>
-          )}
-        </Toolbar>
       </div>
+      <Toolbar className={classes.toolbar}>
+        {user?.result ? (
+          <div className={classes.profile}>
+            <Avatar className={classes.purple}></Avatar>
+            <Typography className={classes.username} variant="h6"></Typography>
+            <Button variant="contained" className={classes.logout} color="secondary">
+              Logout
+            </Button>
+          </div>
+        ) : (
+          <Button component={Link} to="/auth" variant="contained" color="primary">
+            Sign in
+          </Button>
+        )}
+      </Toolbar>
     </AppBar>
   );
 };
