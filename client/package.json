@@ -10,6 +10,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "gapi-script": "^1.2.0",
     "moment": "^2.27.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -49,5 +50,22 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0"
+  },
+  "web": {
+    "client_id": "6680619751-igpm64dppt9sloem1qm9dbflue6ae08l.apps.googleusercontent.com",
+    "project_id": "memories-project-377802",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "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",
+    "redirect_uris": [
+      "http://localhost:3000",
+      "http://localhost:3000/auth",
+      "http://localhost"
+    ],
+    "javascript_origins": [
+      "https://localhost:3000",
+      "http://localhost:3000"
+    ]
   }
 }
