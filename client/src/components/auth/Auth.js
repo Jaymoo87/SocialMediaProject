@@ -32,20 +32,17 @@ const Auth = () => {
       dispatch(signin(formData, nav("/")));
     }
   };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleShowPassword = () => setShowPassword(!showPassword);
 
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: "6680619751-igpm64dppt9sloem1qm9dbflue6ae08l.apps.googleusercontent.com",
-        scope: "email",
-      });
-    }
-    gapi.load("client:auth2", start);
-  }, []);
+  const switchMode = () => {
+    setIsSignUp((prevIsSignup) => !prevIsSignup);
+    setShowPassword(false);
+  };
 
   const googleSuccess = async (res) => {
     const result = res?.profileObj;
@@ -63,9 +60,15 @@ const Auth = () => {
     console.log("Google Sign In failed!");
   };
 
-  const switchMode = (e) => {
-    setIsSignUp((prevIsSignup) => !prevIsSignup);
-  };
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: "6680619751-igpm64dppt9sloem1qm9dbflue6ae08l.apps.googleusercontent.com",
+        scope: "email",
+      });
+    }
+    gapi.load("client:auth2", start);
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
