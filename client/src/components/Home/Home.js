@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { Container, Grow, Grid, Paper, AppBar, Button, OutlinedInput, TextField } from "@material-ui/core";
+import { Container, Grow, Grid, Paper, AppBar, Button, TextField } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { getPosts, getPostBySearch } from "../../actions/posts";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
+import ChipInput from "material-ui-chip-input";
 
 import Pagination from "../Pagination";
 import Posts from "../posts/Posts";
@@ -17,10 +18,11 @@ function useQuery() {
 const Home = () => {
   const [currentId, setCurrentId] = useState(null);
   const [search, setSearch] = useState("");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState([]);
 
   const dispatch = useDispatch();
-  const nav = useNavigate();
+  const history = useHistory();
+
   const classes = useStyles();
   const query = useQuery();
   const page = query.get("page") || 1;
@@ -32,10 +34,11 @@ const Home = () => {
   };
 
   const searchPost = () => {
-    if (!search.trim()) {
+    if (!search.trim() || tags) {
       dispatch(getPostBySearch({ search, tags: tags.join(",") }));
+      history.push(`/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")} `);
     } else {
-      nav("/");
+      history.push("/");
     }
   };
 
@@ -65,21 +68,21 @@ const Home = () => {
                 type="search"
                 variant="outlined"
                 label="Search Memories"
-                // onKeyDown={handleKeyDown}
+                onKeyDown={handleKeyDown}
                 fullWidth
-                value="TEST"
+                value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <TextField
+              <ChipInput
                 type="search"
                 style={{ margin: "10px 0" }}
                 value={tags}
-                // onAdd={(tag) => handleAddTAG(tag)}
-                // onDelete={(tag) => handleDeleteTAG(tag)}
+                onAdd={(chip) => handleAddTAG(chip)}
+                onDelete={(chip) => handleDeleteTAG(chip)}
                 label="Search Tags"
                 variant="outlined"
               />
-              <Button onClick={searchPost} className={classes.searchButton} color="primary">
+              <Button onClick={searchPost} variant="contained" className={classes.searchButton} color="primary">
                 {" "}
                 Search{" "}
               </Button>

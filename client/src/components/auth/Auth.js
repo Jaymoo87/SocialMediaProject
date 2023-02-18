@@ -6,7 +6,7 @@ import { HiOutlineLockClosed } from "react-icons/hi";
 import { gapi } from "gapi-script";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { signin, signup } from "../../actions/auth";
 
 import Icon from "./icon";
@@ -18,7 +18,7 @@ const initialState = { firstName: "", lastName: "", email: "", password: "", con
 const Auth = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const nav = useNavigate();
+  const history = useHistory();
 
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
@@ -27,9 +27,9 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignUp) {
-      dispatch(signup(formData, nav("/")));
+      dispatch(signup(formData, history.push("/")));
     } else {
-      dispatch(signin(formData, nav("/")));
+      dispatch(signin(formData, history.push("/")));
     }
   };
 
@@ -50,7 +50,7 @@ const Auth = () => {
 
     try {
       dispatch({ type: "AUTH", data: { result, token } });
-      nav("/");
+      history.push("/");
     } catch (error) {
       console.log(error);
     }
