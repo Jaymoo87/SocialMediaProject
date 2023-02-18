@@ -15,7 +15,7 @@ const postsRouter = express.Router();
 postsRouter.get("/", getPosts);
 postsRouter.get("/search", getPostBySearch);
 
-postsRouter.post("/", createPost);
+postsRouter.post("/", authCheck, createPost);
 postsRouter.patch("/:id", authCheck, updatePost);
 postsRouter.delete("/:id", authCheck, deletePost);
 

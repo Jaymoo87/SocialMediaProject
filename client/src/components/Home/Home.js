@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { Container, Grow, Grid, Paper, AppBar, Button, TextField } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { getPosts, getPostBySearch } from "../../actions/posts";
+import { getPostBySearch } from "../../actions/posts";
 import { useLocation, useHistory } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
 
@@ -30,6 +30,7 @@ const Home = () => {
 
   const handleKeyDown = (e) => {
     if (e.keyCode === 13) {
+      searchPost();
     }
   };
 
@@ -45,9 +46,9 @@ const Home = () => {
   const handleAddTAG = (tag) => setTags([...tags, tag]);
   const handleDeleteTAG = (TAGToDelete) => setTags(tags.filter((tag) => tag !== TAGToDelete));
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch, currentId]);
+  // useEffect(() => {
+  //   dispatch(getPosts());
+  // }, [dispatch, currentId]);
   return (
     <Grow in>
       <Container maxWidth="xl">
