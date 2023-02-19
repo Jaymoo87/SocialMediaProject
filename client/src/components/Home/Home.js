@@ -66,7 +66,6 @@ const Home = () => {
             <AppBar className={classes.appBarSearch} position="static" color="inherit">
               <TextField
                 name="search"
-                type="search"
                 variant="outlined"
                 label="Search Memories"
                 onKeyDown={handleKeyDown}
@@ -75,7 +74,6 @@ const Home = () => {
                 onChange={(e) => setSearch(e.target.value)}
               />
               <ChipInput
-                type="search"
                 style={{ margin: "10px 0" }}
                 value={tags}
                 onAdd={(chip) => handleAddTAG(chip)}
@@ -84,14 +82,15 @@ const Home = () => {
                 variant="outlined"
               />
               <Button onClick={searchPost} variant="contained" className={classes.searchButton} color="primary">
-                {" "}
-                Search{" "}
+                Search
               </Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-            <Paper elevation={6}>
-              <Pagination />
-            </Paper>
+            {!searchQuery && !tags.length && (
+              <Paper elevation={6} className={classes.pagination}>
+                <Pagination page={page} />
+              </Paper>
+            )}
           </Grid>
         </Grid>
       </Container>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
+import { useHistory } from "react-router-dom";
 
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +11,7 @@ import useStyles from "./styles.js";
 const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const [postData, setPostData] = useState({ title: "", message: "", tags: "", selectedFile: "" });
@@ -25,14 +27,14 @@ const Form = ({ currentId, setCurrentId }) => {
     if (currentId) {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
     } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      dispatch(createPost({ ...postData, name: user?.result?.name }, history));
     }
     clear();
   };
 
-  if (!user?.result.name) {
+  if (!user?.result?.name) {
     return (
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} elevation={6}>
         <Typography variant="h6" align="center">
           Got a Sign In in if you want to remember your Memories. You will forget them if you Dont!
         </Typography>

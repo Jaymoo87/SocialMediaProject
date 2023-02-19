@@ -8,6 +8,7 @@ export default makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
+    // backgroundColor: "rgba(38, 154, 190)",
   },
   form: {
     display: "flex",
