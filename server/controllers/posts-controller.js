@@ -1,10 +1,28 @@
+import express from "express";
 import PostMessage from "../models/postMessage.js";
+
 import mongoose from "mongoose";
+
+const controllerRouter = express.Router();
+
+export const getPost = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const post = await PostMessage.findById(id);
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
 
 export const getPosts = async (req, res) => {
   const { page } = req.query;
+
   try {
     const LIMIT = 8;
+
+    //get starting index of every page for pagination
     const startIndex = (Number(page) - 1) * LIMIT;
     const total = await PostMessage.countDocuments({});
 
@@ -13,7 +31,7 @@ export const getPosts = async (req, res) => {
     res.status(200).json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
   } catch (error) {
     console.log(error);
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ message: error });
   }
 };
 
@@ -84,3 +102,5 @@ export const likePost = async (req, res) => {
 
   res.json(updatedPost);
 };
+
+export default controllerRouter;

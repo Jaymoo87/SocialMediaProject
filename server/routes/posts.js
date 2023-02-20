@@ -1,6 +1,7 @@
 import express from "express";
 
 import {
+  getPost,
   getPosts,
   createPost,
   updatePost,
@@ -13,6 +14,7 @@ import authCheck from "../middleware/auth.mw.js";
 const postsRouter = express.Router();
 
 postsRouter.get("/", getPosts);
+postsRouter.get("/:id", getPost);
 postsRouter.get("/search", getPostBySearch);
 
 postsRouter.post("/", authCheck, createPost);
